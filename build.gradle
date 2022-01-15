@@ -1,0 +1,37 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'org.bcr.rosi.cloud'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springBootAdminVersion', "2.6.0")
+	set('springCloudVersion', "2021.0.0")
+}
+
+dependencies {
+	implementation 'de.codecentric:spring-boot-admin-server'
+	implementation 'de.codecentric:spring-boot-admin-server-cloud'
+	implementation 'de.codecentric:spring-boot-admin-server-ui'
+	implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-all:1.1.10.RELEASE'
+	implementation 'org.springframework.boot:spring-boot-autoconfigure'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
